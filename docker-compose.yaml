@@ -1,0 +1,22 @@
+services:
+  backend:
+    build:
+      context: ./back
+    volumes:
+      - ./back:/app  
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+    command: flask run --host=0.0.0.0 --port=5000
+
+  frontend:
+    build:
+      context: ./front/frontend
+    volumes:
+      - ./front/frontend:/app 
+    ports:
+      - "3000:3000"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: yarn start
